@@ -43,7 +43,7 @@ async function rodar(url) {
 
 function render(s, d, age) {
   out.innerHTML = `
-    <div class="score ${d.band}">
+    <div class="score ${d.band}" style="--s:${Number(d.score) || 0}">
       <strong>${d.score}</strong>
       <div><span class="lbl">${esc(d.label)}</span><small>confiança ${d.confianca}</small></div>
     </div>
