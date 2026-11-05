@@ -96,6 +96,28 @@ async function pegaMarkdown(href, chave) {
   } catch { return { ok: false, status: 0, raw: '' }; }
 }
 
+const ENTIDADES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ndash: '–', mdash: '—', hellip: '…' };
+const decodifica = s => s
+  .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+  .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+  .replace(/&([a-z]+);/gi, (m, n) => ENTIDADES[n.toLowerCase()] ?? m);
+
+// Plano B quando o Jina falha: converte o HTML em texto no mesmo formato que o extract.js espera.
+function htmlParaMarkdown(html, base, titulo) {
+  let h = html.replace(/<(script|style|noscript|svg|nav|footer|aside|header|form|iframe)\b[\s\S]*?<\/\1>/gi, ' ');
+  h = h.replace(/<a\s[^>]*?href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, (_, href, txt) => {
+    const t = txt.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    let abs; try { abs = new URL(decodifica(href), base).href; } catch { return t; }
+    return /^https?:/.test(abs) && t ? `[${t}](${abs})` : t;
+  });
+  const blocos = [];
+  for (const m of h.matchAll(/<(h[1-3]|p|li|blockquote)\b[^>]*>([\s\S]*?)<\/\1>/gi)) {
+    const t = decodifica(m[2].replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').trim();
+    if (t.length >= 40 || (/^h/i.test(m[1]) && t.length > 5)) blocos.push(t);
+  }
+  return `Title: ${titulo || ''}\n\nMarkdown Content:\n${blocos.join('\n')}`;
+}
+
 export async function onRequestGet({ request, env, waitUntil }) {
   const url = new URL(request.url);
 
@@ -121,13 +143,25 @@ export async function onRequestGet({ request, env, waitUntil }) {
   }
 
   const [md, html] = await Promise.all([pegaMarkdown(alvo.href, env.JINA_KEY), pegaHtml(alvo.href)]);
-  if (!md.ok) return json({ error: `Leitor indisponível (${md.status || 'timeout'})` }, 502);
+  const meta = html ? metaDoHtml(html) : { ok: false };
 
-  const corpo = JSON.stringify({ raw: md.raw, meta: html ? metaDoHtml(html) : { ok: false } });
+  let raw = md.raw, leitor = 'jina', ttl = TTL_CACHE;
+  if (!md.ok) {
+    // Jina fora do ar ou limitado: lê o HTML por conta própria
+    const local = html ? htmlParaMarkdown(html, alvo.href, meta.title) : '';
+    if (local.split('\n').length < 4) {
+      return json({
+        error: `Não consegui ler a página (leitor ${md.status || 'timeout'}, ${env.JINA_KEY ? 'chave configurada' : 'sem chave'}). Tente de novo em instantes.`,
+      }, 502);
+    }
+    raw = local; leitor = 'local'; ttl = 3600; // resultado do plano B fica menos tempo em cache
+  }
+
+  const corpo = JSON.stringify({ raw, meta, leitor });
   const resp = new Response(corpo, {
     headers: {
       'content-type': 'application/json; charset=utf-8',
-      'cache-control': `public, max-age=${TTL_CACHE}`,
+      'cache-control': `public, max-age=${ttl}`,
       'x-cache': 'miss',
     },
   });
