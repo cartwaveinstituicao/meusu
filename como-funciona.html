@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Como funciona — Veritas</title>
+<meta name="description" content="Quais sinais o Veritas analisa, como a nota é calculada e quais são os limites da análise.">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <p><a href="/">← Voltar</a></p>
+  <h1>Como funciona</h1>
+
+  <p>O Veritas lê a página do link que você colou e procura <strong>sinais</strong> que costumam acompanhar conteúdo bem apurado ou conteúdo duvidoso. Ele soma esses sinais numa nota de 0 a 100. A nota é um ponto de partida para a sua checagem, <strong>não um veredito</strong> sobre a notícia ser verdadeira ou falsa, e também não avalia a reputação do veículo.</p>
+
+  <h2>O que é analisado</h2>
+  <p>A nota começa em 55 e sobe ou desce conforme os sinais abaixo.</p>
+
+  <h3>Sobre o site</h3>
+  <ul>
+    <li><strong>Idade do domínio</strong> (consulta pública RDAP): menos de 1 ano, −9; 3 anos ou mais, +8.</li>
+    <li><strong>Extensão do endereço:</strong> institucional como .gov.br, .edu.br, .jus.br, +8; extensões de registro em massa (.xyz, .top, .click e similares), −7.</li>
+    <li><strong>Plataforma aberta</strong> (Blogspot, Medium, redes sociais etc.): −6, porque o endereço não diz quem escreveu.</li>
+    <li><strong>Endereço com caracteres disfarçados</strong> (punycode): −10.</li>
+    <li><strong>Sem HTTPS:</strong> −8.</li>
+  </ul>
+
+  <h3>Sobre a matéria</h3>
+  <ul>
+    <li><strong>Autoria declarada:</strong> +8. Sem assinatura (quando a página pôde ser lida): −5.</li>
+    <li><strong>Data de publicação:</strong> +6. Sem data: −5.</li>
+    <li><strong>Tamanho do texto:</strong> menos de 1.200 caracteres, −5; texto longo e desenvolvido, +3.</li>
+    <li><strong>Links para sites externos:</strong> de +2 a +5. Matéria longa sem nenhuma referência, −4. É um sinal fraco: qualquer site pode colocar links.</li>
+    <li><strong>Endereço canônico apontando para outro domínio:</strong> −4.</li>
+  </ul>
+
+  <h3>Sobre a linguagem</h3>
+  <ul>
+    <li>Manchete em maiúsculas ou com várias exclamações.</li>
+    <li>Marcadores de sensacionalismo, atribuição vaga ("especialistas dizem"), conspiração ("a mídia esconde") e afirmações absolutas ("100% comprovado").</li>
+    <li>Trechos entre aspas não contam: uma matéria que <em>cita</em> uma teoria da conspiração não é tratada como conspiratória.</li>
+  </ul>
+
+  <h2>Confiança da análise</h2>
+  <p>Ao lado da nota aparece a confiança (alta, média ou baixa), que indica quantos sinais foram realmente avaliados. Se não conseguimos ler os metadados da página ou a idade do domínio, a confiança cai e a ausência desses dados não é punida.</p>
+
+  <h2>Limites, importante</h2>
+  <ul>
+    <li>Um site mal-intencionado pode ter autor, data e domínio antigo. Nota alta <strong>não garante</strong> que o conteúdo é verdadeiro.</li>
+    <li>Um veículo sério pode tirar nota baixa se a página não pôde ser lida bem, estiver atrás de paywall ou não declarar autoria.</li>
+    <li>O Veritas não verifica fatos nem compara o conteúdo com outras fontes.</li>
+    <li>Os pesos são uma estimativa e podem mudar. Se você acha que algum resultado ficou injusto, <a href="/contato">fale com a gente</a>.</li>
+  </ul>
+
+  <h2>Checklist manual</h2>
+  <p>Junto com a nota, o Veritas sugere passos que a automação não faz: procurar o autor, buscar o trecho entre aspas, fazer busca reversa de imagem e procurar o comunicado oficial. Eles costumam ser mais úteis do que a nota.</p>
+</main>
+<footer>
+  <p class="dim"><a href="/">Início</a> · <a href="/privacidade">Privacidade</a> · <a href="/contato">Contato e contestação</a></p>
+</footer>
+</body>
+</html>
