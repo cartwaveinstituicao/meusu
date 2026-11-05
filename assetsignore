@@ -1,0 +1,12 @@
+functions
+worker.js
+wrangler.jsonc
+package.json
+package-lock.json
+.gitignore
+.assetsignore
+dev-server.mjs
+test.mjs
+.git
+node_modules
+.wrangler
