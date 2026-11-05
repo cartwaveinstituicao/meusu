@@ -3,21 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Veritas — sinais</title>
+<title>Veritas — analise sinais de uma notícia</title>
+<meta name="description" content="Cole o link de uma notícia e veja sinais de qualidade da página: autoria, data, idade do domínio, linguagem sensacionalista e mais. Análise automática, não é veredito.">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <main>
   <h1>Veritas</h1>
-  <p class="sub">Passo 2: sinais detectados. Nota vem depois.</p>
+  <p class="sub">Cole o link de uma notícia e veja os sinais de qualidade da página.</p>
 
   <div class="row">
     <input id="url" type="url" placeholder="https://...">
     <button id="go">Analisar</button>
   </div>
 
+  <p class="dim aviso">Análise automática de sinais. Não é um veredito de verdade ou falsidade: use junto com o checklist e com a sua própria checagem. <a href="/como-funciona">Como funciona</a></p>
+
   <section id="out" hidden></section>
+
+  <!-- ANÚNCIOS: ponha o código do bloco aqui, fora de #out, nunca dentro do resultado -->
 </main>
+
+<footer>
+  <p class="dim"><a href="/como-funciona">Como funciona</a> · <a href="/privacidade">Privacidade</a> · <a href="/contato">Contato e contestação</a></p>
+</footer>
 <script type="module" src="/app.js"></script>
 </body>
 </html>
