@@ -1,0 +1,34 @@
+:root { --bg:#0d0f12; --fg:#e7e9ec; --mut:#8b929c; --line:#232830; --neg:#e74c3c; }
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,sans-serif }
+main { max-width:760px; margin:0 auto; padding:48px 20px 80px }
+h1 { margin:0 0 6px; font-size:32px }
+.sub, .dim { color:var(--mut); margin:0 0 24px }
+form { display:flex; gap:10px; margin-bottom:28px }
+input { flex:1; padding:11px 13px; background:#151920; border:1px solid var(--line); border-radius:8px; color:var(--fg); font:inherit }
+input:focus { outline:none; border-color:#4a90d9 }
+button { padding:11px 22px; background:#4a90d9; color:#fff; border:0; border-radius:8px; font-weight:600; cursor:pointer }
+pre { white-space:pre-wrap; background:#151920; padding:14px; border-radius:8px; border:1px solid var(--line); font-size:13px; max-height:60vh; overflow:auto }
+.err { color:var(--neg) } .load { color:var(--mut) }
+h2 { font-size:19px; line-height:1.3 }
+h3 { margin-top:26px; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--mut) }
+.sig { list-style:none; padding:0; display:grid; gap:6px; margin:20px 0 }
+.sig li { padding:9px 12px; background:#151920; border-left:3px solid var(--line); border-radius:6px; font-size:14px }
+.sig li.ok  { border-left-color:#2ecc71 }
+.sig li.bad { border-left-color:var(--neg) }
+.sig li span { font-weight:700; margin-right:6px }
+.sig small { display:block; color:var(--mut); font-size:12px }
+.lex { padding-left:18px; color:var(--mut); font-size:14px }
+details { margin-top:22px } summary { cursor:pointer; color:var(--mut) }
+.score { display:flex; align-items:center; gap:16px; padding:18px; border-radius:10px; border:1px solid var(--line); margin:20px 0 }
+.score strong { font-size:40px; line-height:1 }
+.score .lbl { display:block; font-weight:600 }
+.score small { color:var(--mut); font-size:12px }
+.score.confiavel, .score.provavel { border-color:#2ecc71 }
+.score.suspeito, .score.muito_suspeito { border-color:var(--neg) }
+.score.satira { border-color:#e6b800 }
+.ev { list-style:none; padding:0; display:grid; gap:6px }
+.ev li { padding:9px 12px; background:#151920; border-left:3px solid var(--line); border-radius:6px; font-size:14px }
+.ev li.pos { border-left-color:#2ecc71 } .ev li.neg { border-left-color:var(--neg) }
+.ev b { color:var(--mut); font-variant-numeric:tabular-nums; margin-right:8px }
+.chk { padding-left:20px; color:var(--mut); font-size:14px }
