@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="unsafe-url">
+<title>Referer Test A</title>
+</head>
+<body>
+
+<h1>Referer Test A</h1>
+
+<p>Esta página contém um identificador fictício:</p>
+
+<code id="marker"></code>
+
+<p>
+<a href="/b.html">Ir para página B</a>
+</p>
+
+<script>
+const marker = "TEST-" + crypto.randomUUID();
+
+document.getElementById("marker").textContent = marker;
+
+history.replaceState(
+    {},
+    "",
+    "?test_marker=" + encodeURIComponent(marker)
+);
+</script>
+
+</body>
+</html>
